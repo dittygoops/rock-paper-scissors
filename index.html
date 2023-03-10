@@ -28,9 +28,9 @@
         }
 
         function getPlayerChoice() {
-            return Number.parseInt(window.prompt("ROCK PAPER SCISSORS!!" +
+            return window.prompt("ROCK PAPER SCISSORS!!" +
             "Make your choice!" + 
-            "(Rock, Paper, or Scissors)"));
+            "(Rock, Paper, or Scissors)").toLowerCase();
         }
 
         console.log(getComputerChoice());
