@@ -41,8 +41,69 @@
             return choice;
         }
 
-        console.log(getComputerChoice());
-        console.log(getPlayerChoice());
+        function playRound() {
+            const playerChoice = getPlayerChoice();
+            const compChoice = getComputerChoice();
+
+            let result = 0;
+            
+            switch (playerChoice) {
+                case 'rock':
+                    switch (compChoice) {
+                        case 'rock':
+                            result = 0;
+                            break;
+                        case 'paper':
+                            result = -1;
+                            break;
+                        case 'scissors':
+                            result = 1;
+                            break;
+                    }
+                
+                case 'paper':
+                    switch (compChoice) {
+                        case 'rock':
+                            result = 1;
+                            break;
+                        case 'paper':
+                            result = 0;
+                            break;
+                        case 'scissors':
+                            result = -1;
+                            break;
+                    }
+                
+                case 'scissors':
+                    switch (compChoice) {
+                        case 'rock':
+                            result = -1;
+                            break;
+                        case 'paper':
+                            result = 1;
+                            break;
+                        case 'scissors':
+                            result = 0;
+                            break;
+                    }
+            }
+
+            switch (result) {
+                case 1:
+                    window.alert(`You win! ${playerChoice} beats ${compChoice}!`);
+                    break;
+                case 0:
+                    window.alert(`It's a tie! ${playerChoice} and ${compChoice} are equal!`);
+                    break;
+                case -1:
+                    window.alert(`You lose! ${playerChoice} is crushed by ${compChoice}!`);
+                    break;
+            }
+
+            return result;
+        }
+
+        playRound();
     </script>
 </body>
 </html>
