@@ -27,7 +27,14 @@
             return choice;
         }
 
+        function getPlayerChoice() {
+            return Number.parseInt(window.prompt("ROCK PAPER SCISSORS!!" +
+            "Make your choice!" + 
+            "(Rock, Paper, or Scissors)"));
+        }
+
         console.log(getComputerChoice());
+        console.log(getPlayerChoice());
     </script>
 </body>
 </html>
