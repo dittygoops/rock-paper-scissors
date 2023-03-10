@@ -106,7 +106,32 @@
             return result;
         }
 
-        playRound();
+        function game() {
+            let playerScore = 0;
+            let compScore = 0;
+
+            for (i = 0; i < 5; i++) {
+                result = playRound();
+
+                switch (result) {
+                    case 1:
+                        playerScore++;
+                        break;
+                    case 0:
+                        break;
+                    case -1:
+                        compScore++;
+                }
+            }
+
+            playerScore > compScore ? 
+                window.alert(`Great work, Player!\nYou won ${playerScore} to ${compScore}!`):
+                compScore > playerScore ?
+                    window.alert(`Nice try, Player!\n You lost ${playerScore} to ${compScore}.`):
+                    window.alert(`What a battle, Player!\n You tied ${playerScore} to ${compScore}.`);
+        }
+
+        game();
     </script>
 </body>
 </html>
