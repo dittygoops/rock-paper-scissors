@@ -28,9 +28,17 @@
         }
 
         function getPlayerChoice() {
-            return window.prompt("ROCK PAPER SCISSORS!!\n" +
-            "Make your choice!\n" + 
-            "(Rock, Paper, or Scissors)").toLowerCase();
+            let choice = window.prompt("ROCK PAPER SCISSORS!!\n" +
+                "Make your choice!\n" + 
+                "(Rock, Paper, or Scissors)").toLowerCase();
+
+            while (!(choice === 'rock' || choice === 'paper' || choice === 'scissors')) {
+                choice = window.prompt("ROCK PAPER SCISSORS!!\n" +
+                    "Please make a valid choice!\n" + 
+                    "(Rock, Paper, or Scissors)").toLowerCase();
+            }
+
+            return choice;
         }
 
         console.log(getComputerChoice());
