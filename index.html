@@ -7,7 +7,13 @@
     <title>Document</title>
 </head>
 <body>
+    <button class="rock">Rock</button>
+    <button class="paper">Paper</button>
+    <button class="scissors">Scissors</button>
+
     <script>
+        /*
+
         function getComputerChoice() {
             let choice = '';
             let randNum = Math.floor(Math.random() * 3) + 1;
@@ -22,20 +28,6 @@
                 case 3:
                     choice = 'scissors';
                     break;
-            }
-
-            return choice;
-        }
-
-        function getPlayerChoice() {
-            let choice = window.prompt("ROCK PAPER SCISSORS!!\n" +
-                "Make your choice!\n" + 
-                "(Rock, Paper, or Scissors)").toLowerCase();
-
-            while (!(choice === 'rock' || choice === 'paper' || choice === 'scissors')) {
-                choice = window.prompt("ROCK PAPER SCISSORS!!\n" +
-                    "Please make a valid choice!\n" + 
-                    "(Rock, Paper, or Scissors)").toLowerCase();
             }
 
             return choice;
@@ -131,7 +123,20 @@
                     window.alert(`What a battle, Player!\nYou tied ${playerScore} to ${compScore}.`);
         }
 
-        game();
+        */
+
+        function getPlayerChoice() {
+            choice = this.className;
+        }
+
+        let choice = null;
+
+        const btns = document.querySelectorAll('button');
+
+        btns.forEach(btn => btn.addEventListener('click', getPlayerChoice))
+
+
+        // game();
     </script>
 </body>
 </html>
