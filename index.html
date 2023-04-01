@@ -7,136 +7,153 @@
     <title>Document</title>
 </head>
 <body>
-    <button class="rock">Rock</button>
-    <button class="paper">Paper</button>
-    <button class="scissors">Scissors</button>
+    <div>
+        <button class="rock">Rock</button>
+        <button class="paper">Paper</button>
+        <button class="scissors">Scissors</button>
+    </div>
+    
+    <div>
+        <div>
+            <p>You Chose:</p>
+            <p class="player-choice"></p>
+        </div>
+        <div>
+            <p>Computer Chose:</p>
+            <p class="computer-choice"></p>
+        </div>
+    </div>
+
+    <div>
+        <p class="message"></p>
+    </div>
+
+    <div>
+        <div>
+            <p>Player Score:</p>
+            <p class="player-score">0</p>
+        </div>
+
+        <div>
+            <p>Computer Score:</p>
+            <p class="computer-score">0</p>
+        </div>
+    </div>
+
+    <div>
+        <p class="final-message"></p>
+    </div>
 
     <script>
-        /*
-
-        function getComputerChoice() {
-            let choice = '';
-            let randNum = Math.floor(Math.random() * 3) + 1;
-
-            switch (randNum) {
-                case 1:
-                    choice = 'rock';
-                    break;
-                case 2:
-                    choice = 'paper';
-                    break;
-                case 3:
-                    choice = 'scissors';
-                    break;
-            }
-
-            return choice;
-        }
-
-        function playRound() {
-            const playerChoice = getPlayerChoice();
-            const compChoice = getComputerChoice();
-
-            let result = 0;
-            
-            switch (playerChoice) {
-                case 'rock':
-                    switch (compChoice) {
-                        case 'rock':
-                            result = 0;
-                            break;
-                        case 'paper':
-                            result = -1;
-                            break;
-                        case 'scissors':
-                            result = 1;
-                            break;
-                    }
-                    break;
-                
-                case 'paper':
-                    switch (compChoice) {
-                        case 'rock':
-                            result = 1;
-                            break;
-                        case 'paper':
-                            result = 0;
-                            break;
-                        case 'scissors':
-                            result = -1;
-                            break;
-                    }
-                    break;
-                
-                case 'scissors':
-                    switch (compChoice) {
-                        case 'rock':
-                            result = -1;
-                            break;
-                        case 'paper':
-                            result = 1;
-                            break;
-                        case 'scissors':
-                            result = 0;
-                            break;
-                    }
-                    break;
-            }
-
-            switch (result) {
-                case 1:
-                    window.alert(`You win! ${playerChoice} beats ${compChoice}!`);
-                    break;
-                case 0:
-                    window.alert(`It's a tie! ${playerChoice} and ${compChoice} are equal!`);
-                    break;
-                case -1:
-                    window.alert(`You lose! ${playerChoice} is crushed by ${compChoice}!`);
-                    break;
-            }
-
-            return result;
-        }
-
-        function game() {
-            let playerScore = 0;
-            let compScore = 0;
-
-            for (i = 0; i < 5; i++) {
-                result = playRound();
-
-                switch (result) {
-                    case 1:
-                        playerScore++;
-                        break;
-                    case 0:
-                        break;
-                    case -1:
-                        compScore++;
-                }
-            }
-
-            playerScore > compScore ? 
-                window.alert(`Great work, Player!\nYou won ${playerScore} to ${compScore}!`):
-                compScore > playerScore ?
-                    window.alert(`Nice try, Player!\nYou lost ${playerScore} to ${compScore}.`):
-                    window.alert(`What a battle, Player!\nYou tied ${playerScore} to ${compScore}.`);
-        }
-
-        */
-
-        function getPlayerChoice() {
+        function setPlayerChoice() {   
             choice = this.className;
+            game();
         }
 
         let choice = null;
 
         const btns = document.querySelectorAll('button');
+        const message = document.querySelector('.message');
+        const playerScore = document.querySelector('.player-score');
+        const computerScore = document.querySelector('.computer-score');
+        const playerChoice = document.querySelector('.player-choice');
+        const computerChoice = document.querySelector('.computer-choice');
+        const finalMessage = document.querySelector('.final-message');
+        btns.forEach(btn => btn.addEventListener('click', setPlayerChoice));
 
-        btns.forEach(btn => btn.addEventListener('click', getPlayerChoice))
+        function getPlayerChoice() {
+            return choice;
+        }
 
+        function getComputerChoice() {
+            const randNum = Math.floor(Math.random() * 3 + 1);
+            switch (randNum) {
+                case 1:
+                    return 'rock';
+                    break;
+                case 2:
+                    return 'paper';
+                    break;
+                case 3:
+                    return 'scissors';
+                    break;
+            }
+        }
 
-        // game();
+        function playRound() {
+            playerChoice.innerText = getPlayerChoice();
+            computerChoice.innerText = getComputerChoice();
+
+            const results = [
+                [0, -1, 1],
+                [1, 0, -1],
+                [-1, 1, 0]
+            ];
+
+            let playerChoiceNum = null;
+
+            switch (playerChoice.innerText) {
+                case 'rock':
+                    playerChoiceNum = 0;
+                    break;
+                case 'paper':
+                    playerChoiceNum = 1;
+                    break;
+                case 'scissors':
+                    playerChoiceNum = 2;
+                    break;
+            }
+
+            let computerChoiceNum = null;
+            
+            switch (computerChoice.innerText) {
+                case 'rock':
+                    computerChoiceNum = 0;
+                    break;
+                case 'paper':
+                    computerChoiceNum = 1;
+                    break;
+                case 'scissors':
+                    computerChoiceNum = 2;
+                    break;
+            }
+
+            return results[playerChoiceNum][computerChoiceNum];
+        }
+    
+        function game() {
+            const result = playRound();
+            console.log(result);
+
+            switch (result) {
+                case 1:
+                    message.innerText = "You Won!";
+                    playerScore.innerText = parseInt(playerScore.innerText) + 1;
+                    break;
+                case 0:
+                    message.innerText = "Tie";
+                    break;
+                case -1:
+                    message.innerText = "You Lost!";
+                    computerScore.innerText = parseInt(computerScore.innerText) + 1;
+                    break;
+            }
+
+            check();
+        }
+
+        function check() {
+            if (parseInt(playerScore.innerText) === 5 || parseInt(computerScore.innerText) === 5) {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            btns.forEach(btn => btn.disabled = true);
+            parseInt(playerScore.innerText) === 5 ? 
+                finalMessage.innerText = 'Player was first to 5!' :
+                finalMessage.innerText = 'Computer was first to 5!';
+        }
     </script>
 </body>
 </html>
