@@ -9,9 +9,9 @@
 </head>
 <body>
     <div class="button-container">
-        <button class="rock">Rock</button>
-        <button class="paper">Paper</button>
-        <button class="scissors">Scissors</button>
+        <img class="rock button" src="./images/rock.png">
+        <img class="paper button" src="./images/paper.png">
+        <img class="scissors button" src="./images/scissors.png">
     </div>
     
     <div class="choices">
@@ -47,13 +47,13 @@
 
     <script>
         function setPlayerChoice() {   
-            choice = this.className;
+            choice = this.className.split(" ")[0];
             game();
         }
 
         let choice = null;
 
-        const btns = document.querySelectorAll('button');
+        const btns = document.querySelectorAll('.button');
         const message = document.querySelector('.message');
         const playerScore = document.querySelector('.player-score');
         const computerScore = document.querySelector('.computer-score');
@@ -150,7 +150,8 @@
         }
 
         function endGame() {
-            btns.forEach(btn => btn.disabled = true);
+            btns.forEach(btn => btn.removeEventListener('click', setPlayerChoice));
+            btns.forEach(btn => btn.style.opacity = 0.5);
             parseInt(playerScore.innerText) === 5 ? 
                 finalMessage.innerText = 'Player was first to 5!' :
                 finalMessage.innerText = 'Computer was first to 5!';

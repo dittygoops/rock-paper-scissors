@@ -17,12 +17,19 @@ body {
 .choices {
     display: flex;
     justify-content: center;
+    align-items: center;
 }
 
 .player-choice-container,
 .computer-choice-container {
     display: flex;
     flex-direction: column;
+    padding: 25px;
+}
+
+.message-container {
+    display: flex;
+    justify-content: center;
 }
 
 .scores {
@@ -34,4 +41,14 @@ body {
 .computer-score-container {
     display: flex;
     flex-direction: column;
+    padding: 25px;
+}
+
+.final-message-container {
+    display: flex;
+    justify-content: center;
+}
+
+* {
+    text-align: center;
 }
